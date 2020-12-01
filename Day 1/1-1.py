@@ -18,7 +18,7 @@ def findPairs(arr):
     return index[0]
 
 def __main__():
-    file = "input.txt"
+    file = "Day 1\input.txt"
     arr = readFile(file)
     pair = findPairs(arr)
     print(arr[pair[0]] * arr[pair[1]])
