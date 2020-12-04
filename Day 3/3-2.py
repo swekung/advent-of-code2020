@@ -7,7 +7,7 @@ def readFile(file):
     out = []
     for line in text:
         line = line.strip('\n')
-        out.append(list(line))
+        out.append(line)
     text.close()
     return out
 
