@@ -28,7 +28,7 @@ def iterAnswers(answer):
     return ans
 
 def main():
-    answers = readFile("Day 6\input.txt")
+    answers = readFile("Day 6/input.txt")
     print(sum(iterAnswers(answers)))
     
 
