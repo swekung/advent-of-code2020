@@ -36,14 +36,17 @@ def runProg(prog):
         
 
 def debugLoop(prog):
+    tmp = False
     for i in range(len(prog)):
-        debugProg = copy.deepcopy(prog)
+        debugProg = copy.copy(prog)
         if "jmp" in prog[i][0]:
-            debugProg[i][0] = "nop"
+            debugProg[i] = ["nop", prog[i][1]]
+            tmp = runProg(debugProg)
         elif "nop" in prog[i][0]:
-            debugProg[i][0] = "jmp"
-        if runProg(debugProg):
-            return runProg(debugProg)
+            debugProg[i] = ["jmp", prog[i][1]]
+            tmp = runProg(debugProg)
+        if tmp:
+            return tmp
         
 
 
