@@ -24,7 +24,8 @@ def readFile(file):
     text.close()
     return out
 
-def flip(arr):
+def flip(oldarr):
+    arr = copy.deepcopy(oldarr)
     isOccupied = arr[1][1]
     arr[1][1] = 0
     empty = 0
@@ -37,7 +38,7 @@ def flip(arr):
                 full += 1
             else:
                 empty += 1
-    if isOccupied == 1 and empty > 4:
+    if isOccupied == 1 and full >= 4:
         return 0
     elif not isOccupied == 1 and full == 0:
         return 1
@@ -45,11 +46,12 @@ def flip(arr):
         return isOccupied
 
 
-def adjSum(arr):
+def adjSum(oldarr):
+    arr = copy.deepcopy(oldarr)
     arr = np.pad(arr, (1,1), 'constant', constant_values=(-1, -1))
     temp = np.zeros((len(arr) - 2, len(arr) - 2))
     for i in range(1, len(arr) - 1):
-        for j in range(1, len(arr[1]) - 1):
+        for j in range(1, len(arr[i]) - 1):
             if arr[i][j] == -1:
                 temp[i-1][j-1] = -1
             else:
@@ -57,7 +59,7 @@ def adjSum(arr):
     return temp
 
 def main():
-    arr = readFile("Day 11\itest.txt")
+    arr = readFile("Day 11\input.txt")
     areEqual = False
     lastArr = adjSum(arr)
     arr = adjSum(lastArr)
@@ -65,6 +67,8 @@ def main():
         lastArr = copy.deepcopy(arr)
         arr = adjSum(arr)
         areEqual = np.array_equal(lastArr, arr)
+
+    print(np.count_nonzero(arr == 1))
     print(arr)
 
 
